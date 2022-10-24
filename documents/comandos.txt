@@ -1,0 +1,36 @@
+create database empresa;
+use empresa;
+create table empresa(idEmpresa INT NOT NULL, direccion VARCHAR (50) NOT NULL, telefono INT NOT NULL, giro INT NOT NULL, PRIMARY KEY(idEmpresa));
+create table Venta(idVenta INT NOT NULL, idEmpresa INT NOT NULL, fechaVenta DATE NOT NULL, horaVenta TIME NOT NULL, idVendedor INT NOT NULL, PRIMARY KEY(idVenta));
+create table Vendedores(idVendedor INT NOT NULL, apellido VARCHAR (50) NOT NULL, nombre VARCHAR (50) NOT NULL, fechaNacimiento DATE NOT NULL, domicilio VARCHAR (50) NOT NULL, fechaContratacion DATE NOT NULL, direccion VARCHAR (50) NOT NULL, ciudad VARCHAR (50) NOT NULL, region VARCHAR (50) NOT NULL, PRIMARY KEY(idVendedor));
+create table DetalleVenta(idVenta INT NOT NULL, idProducto INT NOT NULL, idCliente INT NOT NULL, precioUnidad INT NOT NULL, cantidad INT NOT NULL, descuento INT NOT NULL);
+create table Clientes(idCliente INT NOT NULL, nombreCliente VARCHAR (50) NOT NULL, nombreContacto VARCHAR (50) NOT NULL, cargoContacto INT NOT NULL, direccion VARCHAR (50) NOT NULL, ciudad VARCHAR (50) NOT NULL, region VARCHAR (50) NOT NULL, telefono INT NOT NULL, PRIMARY KEY(idCliente));
+create table Productos(idProducto INT NOT NULL, nombreProducto VARCHAR(50) NOT NULL, precioUnidad INT NOT NULL, idCategoria INT NOT NULL, idEmpresa INT NOT NULL, PRIMARY KEY(idProducto));
+create table CategoriasVentas(idCategoria INT NOT NULL, nombreCategoria VARCHAR (50) NOT NULL, descripcion VARCHAR (250) NOT NULL, PRIMARY KEY(idCategoria));
+create table Compras(idCompra INT NOT NULL, idProveedor INT NOT NULL, idEmpresa INT NOT NULL, fechaCompra DATE NOT NULL, encargadoCompra VARCHAR (50) NOT NULL, PRIMARY KEY(idCompra));
+create table DetalleCompra(idCompra INT NOT NULL, idExistencia INT NOT NULL, idProveedor INT NOT NULL, precioUnidad INT NOT NULL, cantidad INT NOT NULL, descuento INT NOT NULL);
+create table proovedores(idProveedor INT NOT NULL, nombreEmpresa VARCHAR (50) NOT NULL, rut INT NOT NULL, nombreContacto VARCHAR (50) NOT NULL, direccion VARCHAR (50) NOT NULL, ciudad VARCHAR (50) NOT NULL, region VARCHAR (50) NOT NULL, telefono INT NOT NULL, PRIMARY KEY(idProveedor));
+create table existencias(idExistencia INT NOT NULL, nombreExistencia VARCHAR (50) NOT NULL, precioUnidad INT NOT NULL, unidadesExistencia INT NOT NULL, idCategoria INT NOT NULL, idEmpresa INT NOT NULL, PRIMARY KEY(idExistencia));
+create table CategoriasCompra(idCategoria INT NOT NULL, nombreCategoria VARCHAR (50) NOT NULL, descripcion VARCHAR (250) NOT NULL, PRIMARY KEY(idCategoria));
+
+alter table Venta add FOREIGN KEY (idEmpresa) REFERENCES empresa (idEmpresa);
+alter table Venta add FOREIGN KEY (idVendedor) REFERENCES Vendedores (idVendedor);
+
+alter table DetalleVenta add PRIMARY KEY (idVenta, idProducto, idCliente);
+alter table DetalleVenta add FOREIGN KEY (idVenta) REFERENCES Venta (idVenta);
+alter table DetalleVenta add FOREIGN KEY (idProducto) REFERENCES Productos (idProducto);
+alter table DetalleVenta add FOREIGN KEY (idCliente) REFERENCES Clientes (idCliente);
+
+alter table Productos add FOREIGN KEY (idCategoria) REFERENCES CategoriasVentas (idCategoria);
+alter table Productos add FOREIGN KEY (idEmpresa) REFERENCES empresa (idEmpresa);
+
+alter table Compras add FOREIGN KEY (idProveedor) REFERENCES proovedores (idProveedor);
+alter table Compras add FOREIGN KEY (idEmpresa) REFERENCES empresa (idEmpresa);
+
+alter table DetalleCompra add PRIMARY KEY (idCompra, idExistencia, idProveedor);
+alter table DetalleCompra add FOREIGN KEY (idExistencia) REFERENCES existencias (idExistencia);
+alter table DetalleCompra add FOREIGN KEY (idCompra) REFERENCES Compras (idCompra);
+alter table DetalleCompra add FOREIGN KEY (idProveedor) REFERENCES proovedores (idProveedor);
+
+alter table existencias add FOREIGN KEY (idCategoria) REFERENCES CategoriasCompra (idCategoria);
+alter table existencias add FOREIGN KEY (idEmpresa) REFERENCES empresa (idEmpresa);
