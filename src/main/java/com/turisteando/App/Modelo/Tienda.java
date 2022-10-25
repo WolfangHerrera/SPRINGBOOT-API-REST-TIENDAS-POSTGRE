@@ -30,6 +30,12 @@ public class Tienda {
     @Column(name = "WebTienda", nullable = false)
     private String webTienda;
 
+    @Column(name = "MapsTienda", nullable = false)
+    private String mapsTienda;
+
+    @Column(name = "ImagenTienda", nullable = false)
+    private String imagenTienda;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idCategoria", nullable = false)
     private Categoria categoria;
@@ -101,7 +107,23 @@ public class Tienda {
         this.categoria = categoria;
     }
 
-    public Tienda(Long idTienda, String nombreTienda, String descripcionTienda, String emailTienda, String direccionTienda, Long telefonoTienda, String webTienda) {
+    public String getMapsTienda() {
+        return mapsTienda;
+    }
+
+    public void setMapsTienda(String mapsTienda) {
+        this.mapsTienda = mapsTienda;
+    }
+
+    public String getImagenTienda() {
+        return imagenTienda;
+    }
+
+    public void setImagenTienda(String imagenTienda) {
+        this.imagenTienda = imagenTienda;
+    }
+
+    public Tienda(Long idTienda, String nombreTienda, String descripcionTienda, String emailTienda, String direccionTienda, Long telefonoTienda, String webTienda, String mapsTienda, String imagenTienda, Categoria categoria) {
         this.idTienda = idTienda;
         this.nombreTienda = nombreTienda;
         this.descripcionTienda = descripcionTienda;
@@ -109,6 +131,9 @@ public class Tienda {
         this.direccionTienda = direccionTienda;
         this.telefonoTienda = telefonoTienda;
         this.webTienda = webTienda;
+        this.mapsTienda = mapsTienda;
+        this.imagenTienda = imagenTienda;
+        this.categoria = categoria;
     }
 
     public Tienda() {

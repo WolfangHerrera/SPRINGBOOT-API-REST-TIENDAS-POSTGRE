@@ -64,6 +64,8 @@ public class TiendaServicioImplementacion implements TiendaServicio{
         tienda.setDireccionTienda(tiendaDTO.getDireccionTienda());
         tienda.setTelefonoTienda(tiendaDTO.getTelefonoTienda());
         tienda.setWebTienda(tiendaDTO.getWebTienda());
+        tienda.setImagenTienda(tiendaDTO.getImagenTienda());
+        tienda.setMapsTienda(tiendaDTO.getMapsTienda());
 
         Tienda actualizarTienda = tiendaRepositorio.save(tienda);
         return mapDTO(actualizarTienda);

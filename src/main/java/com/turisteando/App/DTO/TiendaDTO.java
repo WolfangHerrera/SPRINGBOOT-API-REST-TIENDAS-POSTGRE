@@ -27,6 +27,12 @@ public class TiendaDTO {
     @NotEmpty(message = "La pagina web de la Tienda no puede estar vacio")
     private String webTienda;
 
+    @NotEmpty(message = "La imagen de la Tienda no puede estar vacio")
+    private String imagenTienda;
+
+    @NotEmpty(message = "el maps de la Tienda no puede estar vacio")
+    private String mapsTienda;
+
     public Long getIdTienda() {
         return idTienda;
     }
@@ -81,6 +87,22 @@ public class TiendaDTO {
 
     public void setWebTienda(String webTienda) {
         this.webTienda = webTienda;
+    }
+
+    public String getImagenTienda() {
+        return imagenTienda;
+    }
+
+    public void setImagenTienda(String imagenTienda) {
+        this.imagenTienda = imagenTienda;
+    }
+
+    public String getMapsTienda() {
+        return mapsTienda;
+    }
+
+    public void setMapsTienda(String mapsTienda) {
+        this.mapsTienda = mapsTienda;
     }
 
     public TiendaDTO() {
