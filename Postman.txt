@@ -1,25 +1,26 @@
 CATEGORIAS
 
-GET
+GET (OBTENER TODAS LAS CATEGORIAS)
 https://turisteando-app.herokuapp.com/api/categoria
 
 
-GET(ID)
-https://turisteando-app.herokuapp.com/api/categoria/1
+GET(ID) (OBTENER UNA CATEGORIAS POR ID)
+https://turisteando-app.herokuapp.com/api/categoria/{id}
 
 
-POST
+POST (PUBLICAR UNA CATEGORIA)
 https://turisteando-app.herokuapp.com/api/categoria
 
 JSON:
 {
     "nombreCategoria" : "Parques Acuaticos",
-    "descripcionCategoria" : "Los mejores Parques Acuaticos de Melgar"
+    "descripcionCategoria" : "Los mejores Parques Acuaticos de Melgar",
+	"imagenCategoria" : "{linkImagen}"
 }
 
 
-PUT
-https://turisteando-app.herokuapp.com/api/categoria/1
+PUT(ID)(MODIFICAR UNA CATEGORIA POR ID)
+https://turisteando-app.herokuapp.com/api/categoria/{id}
 
 JSON:
 {
@@ -28,8 +29,8 @@ JSON:
 }
 
 
-DELETE(ID)
-https://turisteando-app.herokuapp.com/api/categoria/1
+DELETE(ID)(ELIMINAR UNA CATEGORIA POR ID)
+https://turisteando-app.herokuapp.com/api/categoria/{id}
 
 
 ----------------------------------------------------------------------------------
@@ -37,16 +38,16 @@ https://turisteando-app.herokuapp.com/api/categoria/1
 
 TIENDAS
 
-GET(ID-CATEGORIA)
-https://turisteando-app.herokuapp.com/api/categoria/1/tienda
+GET(ID-CATEGORIA)(OBTENER TODAS LAS TIENDAS DE UNA CATEGORIA)
+https://turisteando-app.herokuapp.com/api/categoria/{id}/tienda
 
 
-GET(ID-CATEGORIA/ID-TIENDA)
-https://turisteando-app.herokuapp.com/api/categoria/1/tienda/1
+GET(ID-CATEGORIA/ID-TIENDA)(OBTENER UNA TIENDA DE UNA CATEGORIA)
+https://turisteando-app.herokuapp.com/api/categoria/{id}/tienda/{id}
 
 
-POST(ID-CATEGORIA)
-https://turisteando-app.herokuapp.com/api/categoria/1/tienda
+POST(ID-CATEGORIA)(PUBLICAR UNA TIENDA EN UNA CATEGORIA)
+https://turisteando-app.herokuapp.com/api/categoria/{id}/tienda
 
 JSON:
 {
@@ -55,12 +56,14 @@ JSON:
     "emailTienda" : "contacto@hotelvilladelrosario.com",
     "direccionTienda" : "Cra 22 # 8 - 37",
     "telefonoTienda" : 3105465454,
-    "webTienda" : "@HotelVillaDelRosario"
+    "webTienda" : "@HotelVillaDelRosario",
+	"imagenTienda" : "{linkImagen}",
+	"mapsTienda" : "{linkGoogle}"
 }
 
 
-PUT(ID-CATEGORIA/ID-TIENDA)
-https://turisteando-app.herokuapp.com/api/categoria/1/tienda/1
+PUT(ID-CATEGORIA/ID-TIENDA)(MODIFICAR UNA TIENDA POR ID DE UNA CATEGORIA)
+https://turisteando-app.herokuapp.com/api/categoria/{id}/tienda/{id}
 
 JSON:
 {
@@ -69,11 +72,13 @@ JSON:
 	"emailTienda": "contacto@hotelmelgartown.com",
 	"direccionTienda": "Cra 30 # 24 - 16A",
 	"telefonoTienda": 3105465454,
-	"webTienda": "@HotelMelgarTown"
+	"webTienda": "@HotelMelgarTown",
+	"imagenTienda" : "{linkImagen}",
+	"mapsTienda" : "{linkGoogle}"
 }
 
-DELETE(ID-CATEGORIA/ID-TIENDA)
-https://turisteando-app.herokuapp.com/api/categoria/1/tienda/1
+DELETE(ID-CATEGORIA/ID-TIENDA)(ELIMINAR UNA TIENDA POR ID DE UNA CATEGORIA)
+https://turisteando-app.herokuapp.com/api/categoria/{id}/tienda/{id}
 
 
 ----------------------------------------------------------------------------------
@@ -82,34 +87,34 @@ https://turisteando-app.herokuapp.com/api/categoria/1/tienda/1
 COMENTARIOS
 
 GET(ID-CATEGORIA/ID-TIENDA)
-https://turisteando-app.herokuapp.com/api/categoria/1/tienda/1/comentarios/
+https://turisteando-app.herokuapp.com/api/categoria/{id}/tienda/{id}/comentarios/
 
 
 GET(ID-CATEGORIA/ID-TIENDA/ID-COMENTARIO)
-https://turisteando-app.herokuapp.com/api/categoria/1/tienda/1/comentarios/1
+https://turisteando-app.herokuapp.com/api/categoria/1/tienda/{id}/comentarios/{id}
 
 
 POST(ID-CATEGORIA/ID-TIENDA)
-https://turisteando-app.herokuapp.com/api/categoria/1/tienda/1/comentarios
+https://turisteando-app.herokuapp.com/api/categoria/1/tienda/{id}/comentarios
 
 JSON:
 {
     "tituloComentario" : "Excelente Lugar",
-    "usuarioComentario" : "Andrey Herrera",
+    "usuarioComentario" : "Daniel Bueno",
     "cuerpoComentario" : "Muy bonito el Hotel y muy limpio, Gente agradable"
 }
 
 
 PUT(ID-CATEGORIA/ID-TIENDA/ID-COMENTARIO)
-https://turisteando-app.herokuapp.com/api/categoria/1/tienda/1/comentarios/1
+https://turisteando-app.herokuapp.com/api/categoria/{id}/tienda/{id}/comentarios/{id}
 
 JSON:
 {
     "tituloComentario": "Mal Servicio",
-    "usuarioComentario": "Andrey Herrera",
+    "usuarioComentario": "Daniel Bueno",
     "cuerpoComentario": "No me gusto el lugar"
 }
 
 
 DELETE(ID-CATEGORIA/ID-TIENDA/ID-COMENTARIO)
-https://turisteando-app.herokuapp.com/api/categoria/1/tienda/1/comentarios/1
+https://turisteando-app.herokuapp.com/api/categoria/{id}/tienda/{id}/comentarios/{id}
