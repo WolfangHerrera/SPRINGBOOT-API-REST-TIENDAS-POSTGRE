@@ -8,7 +8,7 @@ public class Comentario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long idComentario;
+    private Long idComentario;
 
     @Column(name = "TituloComentario", nullable = false)
     private String tituloComentario;
@@ -23,11 +23,11 @@ public class Comentario {
     @JoinColumn(name = "idTienda", nullable = false)
     private Tienda tienda;
 
-    public long getIdComentario() {
+    public Long getIdComentario() {
         return idComentario;
     }
 
-    public void setIdComentario(long idComentario) {
+    public void setIdComentario(Long idComentario) {
         this.idComentario = idComentario;
     }
 

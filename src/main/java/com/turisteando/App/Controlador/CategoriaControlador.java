@@ -2,6 +2,7 @@ package com.turisteando.App.Controlador;
 
 import com.turisteando.App.DTO.CategoriaDTO;
 import com.turisteando.App.Servicio.CategoriaServicio;
+import com.turisteando.App.Servicio.LugarServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,29 +12,29 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/categoria")
+@RequestMapping("/api/lugar")
 public class CategoriaControlador {
 
     @Autowired
     public CategoriaServicio categoriaServicio;
 
-    @GetMapping
-    public List<CategoriaDTO> listaCategorias() {
-        return categoriaServicio.listaCategorias();
+    @GetMapping("{idLugar}/categoria")
+    public List<CategoriaDTO> listaCategorias(@PathVariable(value = "idLugar") Long idLugar) {
+        return categoriaServicio.listaCategorias(idLugar);
     }
 
-    @PostMapping
-    public ResponseEntity<CategoriaDTO> crearCategoria(@Valid @RequestBody CategoriaDTO categoriaDTO) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(categoriaServicio.crearCategoria(categoriaDTO));
+    @PostMapping("{idLugar}/categoria")
+    public ResponseEntity<CategoriaDTO> crearCategoria(@Valid @RequestBody CategoriaDTO categoriaDTO, @PathVariable(name = "idLugar") Long idLugar) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(categoriaServicio.crearCategoria(categoriaDTO, idLugar));
     }
 
-    @PutMapping("/{idCategoria}")
-    public ResponseEntity<CategoriaDTO> actualizarCategoria(@Valid @RequestBody CategoriaDTO categoriaDTO, @PathVariable(name = "idCategoria") long idCategoria) {
-        return ResponseEntity.status(HttpStatus.OK).body(categoriaServicio.actualizarCategoria(categoriaDTO, idCategoria));
+    @PutMapping("{idLugar}/categoria/{idCategoria}")
+    public ResponseEntity<CategoriaDTO> actualizarCategoria(@Valid @RequestBody CategoriaDTO categoriaDTO, @PathVariable(name = "idLugar") Long idLugar, @PathVariable(name = "idCategoria") Long idCategoria) {
+        return ResponseEntity.status(HttpStatus.OK).body(categoriaServicio.actualizarCategoria(categoriaDTO, idLugar, idCategoria));
     }
 
-    @DeleteMapping("/{idCategoria}")
-    public ResponseEntity<String> eliminarCategoria(@PathVariable(name = "idCategoria") long idCategoria) {
-        return ResponseEntity.status(HttpStatus.OK).body(categoriaServicio.eliminarCategoria(idCategoria));
+    @DeleteMapping("{idLugar}/categoria/{idCategoria}")
+    public ResponseEntity<String> eliminarCategoria(@PathVariable(name = "idLugar") Long idLugar, @PathVariable(name = "idCategoria") Long idCategoria) {
+        return ResponseEntity.status(HttpStatus.OK).body(categoriaServicio.eliminarCategoria(idLugar, idCategoria));
     }
 }

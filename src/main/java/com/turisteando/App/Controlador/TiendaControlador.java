@@ -11,34 +11,34 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/categoria")
+@RequestMapping("/api/lugar")
 public class TiendaControlador {
 
     @Autowired
     public TiendaServicio tiendaServicio;
     
-    @GetMapping("/{idCategoria}/tienda")
-    public List<TiendaDTO> listaTiendas(@PathVariable(value = "idCategoria") long idCategoria){
-        return tiendaServicio.listaTiendas(idCategoria);
+    @GetMapping("{idLugar}/categoria/{idCategoria}/tienda")
+    public List<TiendaDTO> listaTiendas(@PathVariable(value = "idLugar") Long idLugar, @PathVariable(value = "idCategoria") Long idCategoria){
+        return tiendaServicio.listaTiendas(idLugar, idCategoria);
     }
 
-    @GetMapping("/{idCategoria}/tienda/{idTienda}")
-    public ResponseEntity<TiendaDTO> listaTiendasId(@PathVariable (value = "idCategoria") long idCategoria ,@PathVariable(value = "idTienda") long idTienda){
-        return ResponseEntity.status(HttpStatus.OK).body(tiendaServicio.listaTiendasId(idCategoria, idTienda));
+    @GetMapping("{idLugar}/categoria/{idCategoria}/tienda/{idTienda}")
+    public ResponseEntity<TiendaDTO> listaTiendasId(@PathVariable(value = "idLugar") Long idLugar, @PathVariable (value = "idCategoria") Long idCategoria ,@PathVariable(value = "idTienda") Long idTienda){
+        return ResponseEntity.status(HttpStatus.OK).body(tiendaServicio.listaTiendasId(idLugar, idCategoria, idTienda));
     }
 
-    @PostMapping("/{idCategoria}/tienda")
-    public ResponseEntity<TiendaDTO> crearTienda(@Valid @RequestBody TiendaDTO tiendaDTO, @PathVariable (value = "idCategoria") long idCategoria){
-        return ResponseEntity.status(HttpStatus.CREATED).body(tiendaServicio.crearTienda(tiendaDTO, idCategoria));
+    @PostMapping("{idLugar}/categoria/{idCategoria}/tienda")
+    public ResponseEntity<TiendaDTO> crearTienda(@Valid @RequestBody TiendaDTO tiendaDTO, @PathVariable(value = "idLugar") Long idLugar, @PathVariable (value = "idCategoria") Long idCategoria){
+        return ResponseEntity.status(HttpStatus.CREATED).body(tiendaServicio.crearTienda(tiendaDTO, idLugar, idCategoria));
     }
 
-    @PutMapping("/{idCategoria}/tienda/{idTienda}")
-    public ResponseEntity<TiendaDTO> actualizarTienda(@Valid @RequestBody TiendaDTO tiendaDTO, @PathVariable (value = "idCategoria") long idCategoria ,@PathVariable(value = "idTienda") long idTienda){
-        return ResponseEntity.status(HttpStatus.OK).body(tiendaServicio.actualizarTienda(tiendaDTO, idCategoria, idTienda));
+    @PutMapping("{idLugar}/categoria/{idCategoria}/tienda/{idTienda}")
+    public ResponseEntity<TiendaDTO> actualizarTienda(@Valid @RequestBody TiendaDTO tiendaDTO, @PathVariable(value = "idLugar") Long idLugar, @PathVariable (value = "idCategoria") Long idCategoria ,@PathVariable(value = "idTienda") Long idTienda){
+        return ResponseEntity.status(HttpStatus.OK).body(tiendaServicio.actualizarTienda(tiendaDTO, idLugar, idCategoria, idTienda));
     }
 
-    @DeleteMapping("/{idCategoria}/tienda/{idTienda}")
-    public ResponseEntity<String> eliminarTienda(@PathVariable (value = "idCategoria") long idCategoria ,@PathVariable(value = "idTienda") long idTienda){
-        return ResponseEntity.status(HttpStatus.OK).body(tiendaServicio.eliminarTienda(idCategoria, idTienda));
+    @DeleteMapping("{idLugar}/categoria/{idCategoria}/tienda/{idTienda}")
+    public ResponseEntity<String> eliminarTienda(@PathVariable(value = "idLugar") Long idLugar, @PathVariable (value = "idCategoria") Long idCategoria ,@PathVariable(value = "idTienda") Long idTienda){
+        return ResponseEntity.status(HttpStatus.OK).body(tiendaServicio.eliminarTienda(idLugar, idCategoria, idTienda));
     }
 }

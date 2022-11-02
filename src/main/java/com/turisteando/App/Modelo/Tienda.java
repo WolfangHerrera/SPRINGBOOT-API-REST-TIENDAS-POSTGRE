@@ -40,6 +40,7 @@ public class Tienda {
     @JoinColumn(name = "idCategoria", nullable = false)
     private Categoria categoria;
 
+
     @OneToMany(mappedBy = "tienda", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Comentario> comentarios = new HashSet<>();
 

@@ -21,8 +21,20 @@ public class Categoria {
     @Column(name = "ImagenCategoria", nullable = false)
     private String imagenCategoria;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "idLugar", nullable = false)
+    private Lugar lugar;
+
     @OneToMany(mappedBy = "categoria", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Tienda> tiendas = new HashSet<>();
+
+    public Lugar getLugar() {
+        return lugar;
+    }
+
+    public void setLugar(Lugar lugar) {
+        this.lugar = lugar;
+    }
 
     public Long getIdCategoria() {
         return idCategoria;
@@ -65,4 +77,5 @@ public class Categoria {
     public Categoria() {
         super();
     }
+
 }

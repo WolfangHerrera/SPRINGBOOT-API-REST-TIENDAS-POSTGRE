@@ -3,8 +3,10 @@ package com.turisteando.App.Servicio;
 import com.turisteando.App.DTO.TiendaDTO;
 import com.turisteando.App.Excepcion.ResourceNotFoundException;
 import com.turisteando.App.Modelo.Categoria;
+import com.turisteando.App.Modelo.Lugar;
 import com.turisteando.App.Modelo.Tienda;
 import com.turisteando.App.Repositorio.CategoriaRepositorio;
+import com.turisteando.App.Repositorio.LugarRepositorio;
 import com.turisteando.App.Repositorio.TiendaRepositorio;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,21 +22,29 @@ public class TiendaServicioImplementacion implements TiendaServicio{
     private ModelMapper modelMapper;
 
     @Autowired
+    private LugarRepositorio lugarRepositorio;
+
+    @Autowired
     private TiendaRepositorio tiendaRepositorio;
 
     @Autowired
     private CategoriaRepositorio categoriaRepositorio;
 
     @Override
-    public List<TiendaDTO> listaTiendas(long idCategoria) {
+    public List<TiendaDTO> listaTiendas(Long idLugar, Long idCategoria) {
         List<Tienda> tiendas = tiendaRepositorio.findByCategoriaIdCategoria(idCategoria);
         return tiendas.stream().map(tienda -> mapDTO(tienda)).collect(Collectors.toList());
     }
 
     @Override
-    public TiendaDTO listaTiendasId(long idCategoria, long idTienda) {
+    public TiendaDTO listaTiendasId(Long idLugar, Long idCategoria, Long idTienda) {
+        Lugar lugar = lugarRepositorio.findById(idLugar).orElseThrow(() -> new ResourceNotFoundException("Lugar", "ID", idLugar));
         Categoria categoria = categoriaRepositorio.findById(idCategoria).orElseThrow(() -> new ResourceNotFoundException("Categoria", "ID", idCategoria));
         Tienda tienda = tiendaRepositorio.findById(idTienda).orElseThrow(() -> new ResourceNotFoundException("Tienda", "ID", idTienda));
+
+        if(!categoria.getLugar().getIdLugar().equals(lugar.getIdLugar())){
+            throw new ResourceNotFoundException("Categoria", "ID", idCategoria);
+        }
         if(!tienda.getCategoria().getIdCategoria().equals(categoria.getIdCategoria())){
             throw new ResourceNotFoundException("Tienda", "ID", idTienda);
         }
@@ -42,9 +52,15 @@ public class TiendaServicioImplementacion implements TiendaServicio{
     }
 
     @Override
-    public TiendaDTO crearTienda(TiendaDTO tiendaDTO, long idCategoria) {
+    public TiendaDTO crearTienda(TiendaDTO tiendaDTO, Long idLugar, Long idCategoria) {
         Tienda tienda = mapEntidad(tiendaDTO);
+        Lugar lugar = lugarRepositorio.findById(idLugar).orElseThrow(() -> new ResourceNotFoundException("Lugar", "ID", idLugar));
         Categoria categoria = categoriaRepositorio.findById(idCategoria).orElseThrow(() -> new ResourceNotFoundException("Categoria", "ID", idCategoria));
+
+        if(!categoria.getLugar().getIdLugar().equals(lugar.getIdLugar())){
+            throw new ResourceNotFoundException("Categoria", "ID", idCategoria);
+        }
+
         tienda.setCategoria(categoria);
         Tienda nuevaTienda = tiendaRepositorio.save(tienda);
 
@@ -52,9 +68,14 @@ public class TiendaServicioImplementacion implements TiendaServicio{
     }
 
     @Override
-    public TiendaDTO actualizarTienda(TiendaDTO tiendaDTO, long idCategoria , long idTienda) {
+    public TiendaDTO actualizarTienda(TiendaDTO tiendaDTO, Long idLugar, Long idCategoria , Long idTienda) {
+        Lugar lugar = lugarRepositorio.findById(idLugar).orElseThrow(() -> new ResourceNotFoundException("Lugar", "ID", idLugar));
         Categoria categoria = categoriaRepositorio.findById(idCategoria).orElseThrow(() -> new ResourceNotFoundException("Categoria", "ID", idCategoria));
         Tienda tienda = tiendaRepositorio.findById(idTienda).orElseThrow(() -> new ResourceNotFoundException("Tienda", "ID", idTienda));
+
+        if(!categoria.getLugar().getIdLugar().equals(lugar.getIdLugar())){
+            throw new ResourceNotFoundException("Categoria", "ID", idCategoria);
+        }
         if(!tienda.getCategoria().getIdCategoria().equals(categoria.getIdCategoria())){
             throw new ResourceNotFoundException("Tienda", "ID", idTienda);
         }
@@ -73,9 +94,14 @@ public class TiendaServicioImplementacion implements TiendaServicio{
     }
 
     @Override
-    public String eliminarTienda(long idCategoria, long idTienda) {
+    public String eliminarTienda(Long idLugar, Long idCategoria, Long idTienda) {
+        Lugar lugar = lugarRepositorio.findById(idLugar).orElseThrow(() -> new ResourceNotFoundException("Lugar", "ID", idLugar));
         Categoria categoria = categoriaRepositorio.findById(idCategoria).orElseThrow(() -> new ResourceNotFoundException("Categoria", "ID", idCategoria));
         Tienda tienda = tiendaRepositorio.findById(idTienda).orElseThrow(() -> new ResourceNotFoundException("Tienda", "ID", idTienda));
+
+        if(!categoria.getLugar().getIdLugar().equals(lugar.getIdLugar())){
+            throw new ResourceNotFoundException("Categoria", "ID", idCategoria);
+        }
         if(!tienda.getCategoria().getIdCategoria().equals(categoria.getIdCategoria())){
             throw new ResourceNotFoundException("Tienda", "ID", idTienda);
         }

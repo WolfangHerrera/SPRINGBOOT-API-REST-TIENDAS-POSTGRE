@@ -6,10 +6,10 @@ import java.util.List;
 
 public interface CategoriaServicio {
 
-    List<CategoriaDTO> listaCategorias();
-    CategoriaDTO crearCategoria(CategoriaDTO categoriaDTO);
+    List<CategoriaDTO> listaCategorias(Long idLugar);
+    CategoriaDTO crearCategoria(CategoriaDTO categoriaDTO, Long idLugar);
 
-    CategoriaDTO actualizarCategoria(CategoriaDTO categoriaDTO, Long idCategoria);
+    CategoriaDTO actualizarCategoria(CategoriaDTO categoriaDTO, Long idLugar, Long idCategoria);
 
-    String eliminarCategoria(Long idCategoria);
+    String eliminarCategoria(Long idLugar, Long idCategoria);
 }

@@ -6,7 +6,7 @@ import javax.validation.constraints.Size;
 
 public class ComentarioDTO {
 
-    private long idComentario;
+    private Long idComentario;
 
     @NotEmpty(message = "El titulo del Comentario no puede estar vacio")
     private String tituloComentario;
@@ -18,11 +18,11 @@ public class ComentarioDTO {
     @Size(min = 50, message = "El cuerpo del Comentario debe tener al menos 50 caracteres")
     private String cuerpoComentario;
 
-    public long getIdComentario() {
+    public Long getIdComentario() {
         return idComentario;
     }
 
-    public void setIdComentario(long idComentario) {
+    public void setIdComentario(Long idComentario) {
         this.idComentario = idComentario;
     }
 

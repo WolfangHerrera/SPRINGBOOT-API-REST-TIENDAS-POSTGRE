@@ -11,34 +11,34 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/categoria")
+@RequestMapping("/api/lugar")
 public class ComentarioControlador {
 
     @Autowired
     public ComentarioServicio comentarioServicio;
 
-    @GetMapping("/{idCategoria}/tienda/{idTienda}/comentarios")
-    public List<ComentarioDTO> listaComentarios(@PathVariable(value = "idCategoria") long idCategoria, @PathVariable(value = "idTienda") long idTienda){
-        return comentarioServicio.listaComentarios(idCategoria, idTienda);
+    @GetMapping("{idLugar}/categoria/{idCategoria}/tienda/{idTienda}/comentarios")
+    public List<ComentarioDTO> listaComentarios(@PathVariable(value = "idLugar") Long idLugar, @PathVariable(value = "idCategoria") Long idCategoria, @PathVariable(value = "idTienda") Long idTienda){
+        return comentarioServicio.listaComentarios(idLugar, idCategoria, idTienda);
     }
 
-    @GetMapping("/{idCategoria}/tienda/{idTienda}/comentarios/{idComentario}")
-    public ResponseEntity<ComentarioDTO> listaComentarioId(@PathVariable(value = "idCategoria") long idCategoria, @PathVariable(value = "idTienda") long idTienda, @PathVariable(value = "idComentario") long idComentario){
-        return ResponseEntity.status(HttpStatus.OK).body(comentarioServicio.listaComentarioId(idCategoria, idTienda, idComentario));
+    @GetMapping("{idLugar}/categoria/{idCategoria}/tienda/{idTienda}/comentarios/{idComentario}")
+    public ResponseEntity<ComentarioDTO> listaComentarioId(@PathVariable(value = "idLugar") Long idLugar, @PathVariable(value = "idCategoria") Long idCategoria, @PathVariable(value = "idTienda") Long idTienda, @PathVariable(value = "idComentario") Long idComentario){
+        return ResponseEntity.status(HttpStatus.OK).body(comentarioServicio.listaComentarioId(idLugar, idCategoria, idTienda, idComentario));
     }
 
-    @PostMapping("/{idCategoria}/tienda/{idTienda}/comentarios")
-    public ResponseEntity<ComentarioDTO> crearComentario(@Valid @RequestBody ComentarioDTO comentarioDTO, @PathVariable(value = "idTienda") long idTienda, @PathVariable(value = "idCategoria") long idCategoria){
-        return ResponseEntity.status(HttpStatus.CREATED).body(comentarioServicio.crearComentario(comentarioDTO, idCategoria, idTienda));
+    @PostMapping("{idLugar}/categoria/{idCategoria}/tienda/{idTienda}/comentarios")
+    public ResponseEntity<ComentarioDTO> crearComentario(@Valid @RequestBody ComentarioDTO comentarioDTO, @PathVariable(value = "idLugar") Long idLugar, @PathVariable(value = "idTienda") Long idTienda, @PathVariable(value = "idCategoria") Long idCategoria){
+        return ResponseEntity.status(HttpStatus.CREATED).body(comentarioServicio.crearComentario(comentarioDTO, idLugar, idCategoria, idTienda));
     }
 
-    @PutMapping("/{idCategoria}/tienda/{idTienda}/comentarios/{idComentario}")
-    public ResponseEntity<ComentarioDTO> actualizarComentario(@Valid @RequestBody ComentarioDTO comentarioDTO, @PathVariable(value = "idCategoria") long idCategoria, @PathVariable(value = "idTienda") long idTienda, @PathVariable(value = "idComentario") long idComentario){
-        return ResponseEntity.status(HttpStatus.CREATED).body(comentarioServicio.actualizarComentario(comentarioDTO, idCategoria, idTienda, idComentario));
+    @PutMapping("{idLugar}/categoria/{idCategoria}/tienda/{idTienda}/comentarios/{idComentario}")
+    public ResponseEntity<ComentarioDTO> actualizarComentario(@Valid @RequestBody ComentarioDTO comentarioDTO, @PathVariable(value = "idLugar") Long idLugar, @PathVariable(value = "idCategoria") Long idCategoria, @PathVariable(value = "idTienda") Long idTienda, @PathVariable(value = "idComentario") Long idComentario){
+        return ResponseEntity.status(HttpStatus.CREATED).body(comentarioServicio.actualizarComentario(comentarioDTO, idLugar, idCategoria, idTienda, idComentario));
     }
 
-    @DeleteMapping("/{idCategoria}/tienda/{idTienda}/comentarios/{idComentario}")
-    public ResponseEntity<String> eliminarComentarioId(@PathVariable(value = "idCategoria") long idCategoria, @PathVariable(value = "idTienda") long idTienda, @PathVariable(value = "idComentario") long idComentario){
-        return ResponseEntity.status(HttpStatus.OK).body(comentarioServicio.eliminarComentarioId(idTienda, idCategoria, idComentario));
+    @DeleteMapping("{idLugar}/categoria/{idCategoria}/tienda/{idTienda}/comentarios/{idComentario}")
+    public ResponseEntity<String> eliminarComentarioId(@PathVariable(value = "idCategoria") Long idCategoria, @PathVariable(value = "idLugar") Long idLugar, @PathVariable(value = "idTienda") Long idTienda, @PathVariable(value = "idComentario") Long idComentario){
+        return ResponseEntity.status(HttpStatus.OK).body(comentarioServicio.eliminarComentarioId(idLugar, idTienda, idCategoria, idComentario));
     }
 }

@@ -5,13 +5,13 @@ import com.turisteando.App.DTO.ComentarioDTO;
 import java.util.List;
 
 public interface ComentarioServicio {
-    List<ComentarioDTO> listaComentarios(long idCategoria, long idTienda);
+    List<ComentarioDTO> listaComentarios(Long idLugar, Long idCategoria, Long idTienda);
 
-    ComentarioDTO listaComentarioId(long idCategoria, long idTienda, long idComentario);
+    ComentarioDTO listaComentarioId(Long idLugar, Long idCategoria, Long idTienda, Long idComentario);
 
-    ComentarioDTO crearComentario(ComentarioDTO comentarioDTO, long idCategoria, long idTienda);
+    ComentarioDTO crearComentario(ComentarioDTO comentarioDTO, Long idLugar, Long idCategoria, Long idTienda);
 
-    ComentarioDTO actualizarComentario(ComentarioDTO comentarioDTO, long idCategoria, long idTienda, long idComentario);
+    ComentarioDTO actualizarComentario(ComentarioDTO comentarioDTO, Long idLugar, Long idCategoria, Long idTienda, Long idComentario);
 
-    String eliminarComentarioId(long idCategoria, long idTienda, long idComentario);
+    String eliminarComentarioId(Long idLugar, Long idCategoria, Long idTienda, Long idComentario);
 }

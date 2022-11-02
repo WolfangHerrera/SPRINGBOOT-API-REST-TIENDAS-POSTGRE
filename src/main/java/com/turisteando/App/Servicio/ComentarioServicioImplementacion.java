@@ -4,9 +4,11 @@ import com.turisteando.App.DTO.ComentarioDTO;
 import com.turisteando.App.Excepcion.ResourceNotFoundException;
 import com.turisteando.App.Modelo.Categoria;
 import com.turisteando.App.Modelo.Comentario;
+import com.turisteando.App.Modelo.Lugar;
 import com.turisteando.App.Modelo.Tienda;
 import com.turisteando.App.Repositorio.CategoriaRepositorio;
 import com.turisteando.App.Repositorio.ComentarioRepositorio;
+import com.turisteando.App.Repositorio.LugarRepositorio;
 import com.turisteando.App.Repositorio.TiendaRepositorio;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,9 @@ public class ComentarioServicioImplementacion implements ComentarioServicio {
     private ModelMapper modelMapper;
 
     @Autowired
+    private LugarRepositorio lugarRepositorio;
+
+    @Autowired
     ComentarioRepositorio comentarioRepositorio;
 
     @Autowired
@@ -31,9 +36,14 @@ public class ComentarioServicioImplementacion implements ComentarioServicio {
     CategoriaRepositorio categoriaRepositorio;
 
     @Override
-    public List<ComentarioDTO> listaComentarios(long idCategoria, long idTienda) {
+    public List<ComentarioDTO> listaComentarios(Long idLugar, Long idCategoria, Long idTienda) {
+        Lugar lugar = lugarRepositorio.findById(idLugar).orElseThrow(() -> new ResourceNotFoundException("Lugar", "ID", idLugar));
         Categoria categoria = categoriaRepositorio.findById(idCategoria).orElseThrow(() -> new ResourceNotFoundException("Categoria", "ID", idCategoria));
         Tienda tienda = tiendaRepositorio.findById(idTienda).orElseThrow(() -> new ResourceNotFoundException("Tienda", "ID", idTienda));
+
+        if(!categoria.getLugar().getIdLugar().equals(lugar.getIdLugar())){
+            throw new ResourceNotFoundException("Categoria", "ID", idCategoria);
+        }
         if(!tienda.getCategoria().getIdCategoria().equals(categoria.getIdCategoria())){
             throw new ResourceNotFoundException("Tienda", "ID", idTienda);
         }
@@ -42,9 +52,14 @@ public class ComentarioServicioImplementacion implements ComentarioServicio {
     }
 
     @Override
-    public ComentarioDTO listaComentarioId(long idCategoria, long idTienda, long idComentario) {
+    public ComentarioDTO listaComentarioId(Long idLugar, Long idCategoria, Long idTienda, Long idComentario) {
+        Lugar lugar = lugarRepositorio.findById(idLugar).orElseThrow(() -> new ResourceNotFoundException("Lugar", "ID", idLugar));
         Categoria categoria = categoriaRepositorio.findById(idCategoria).orElseThrow(() -> new ResourceNotFoundException("Categoria", "ID", idCategoria));
         Tienda tienda = tiendaRepositorio.findById(idTienda).orElseThrow(() -> new ResourceNotFoundException("Tienda", "ID", idTienda));
+
+        if(!categoria.getLugar().getIdLugar().equals(lugar.getIdLugar())){
+            throw new ResourceNotFoundException("Categoria", "ID", idCategoria);
+        }
         if(!tienda.getCategoria().getIdCategoria().equals(categoria.getIdCategoria())){
             throw new ResourceNotFoundException("Tienda", "ID", idTienda);
         }
@@ -56,10 +71,15 @@ public class ComentarioServicioImplementacion implements ComentarioServicio {
     }
 
     @Override
-    public ComentarioDTO crearComentario(ComentarioDTO comentarioDTO, long idCategoria, long idTienda) {
+    public ComentarioDTO crearComentario(ComentarioDTO comentarioDTO, Long idLugar, Long idCategoria, Long idTienda) {
+        Lugar lugar = lugarRepositorio.findById(idLugar).orElseThrow(() -> new ResourceNotFoundException("Lugar", "ID", idLugar));
         Comentario comentario = mapEntidad(comentarioDTO);
         Categoria categoria = categoriaRepositorio.findById(idCategoria).orElseThrow(() -> new ResourceNotFoundException("Categoria", "ID", idCategoria));
         Tienda tienda = tiendaRepositorio.findById(idTienda).orElseThrow(() -> new ResourceNotFoundException("Tienda", "ID", idTienda));
+
+        if(!categoria.getLugar().getIdLugar().equals(lugar.getIdLugar())){
+            throw new ResourceNotFoundException("Categoria", "ID", idCategoria);
+        }
         if(!tienda.getCategoria().getIdCategoria().equals(categoria.getIdCategoria())){
             throw new ResourceNotFoundException("Tienda", "ID", idTienda);
         }
@@ -70,9 +90,14 @@ public class ComentarioServicioImplementacion implements ComentarioServicio {
     }
 
     @Override
-    public ComentarioDTO actualizarComentario(ComentarioDTO comentarioDTO, long idCategoria, long idTienda, long idComentario) {
+    public ComentarioDTO actualizarComentario(ComentarioDTO comentarioDTO, Long idLugar, Long idCategoria, Long idTienda, Long idComentario) {
+        Lugar lugar = lugarRepositorio.findById(idLugar).orElseThrow(() -> new ResourceNotFoundException("Lugar", "ID", idLugar));
         Categoria categoria = categoriaRepositorio.findById(idCategoria).orElseThrow(() -> new ResourceNotFoundException("Categoria", "ID", idCategoria));
         Tienda tienda = tiendaRepositorio.findById(idTienda).orElseThrow(() -> new ResourceNotFoundException("Tienda", "ID", idTienda));
+
+        if(!categoria.getLugar().getIdLugar().equals(lugar.getIdLugar())){
+            throw new ResourceNotFoundException("Categoria", "ID", idCategoria);
+        }
         if(!tienda.getCategoria().getIdCategoria().equals(categoria.getIdCategoria())){
             throw new ResourceNotFoundException("Tienda", "ID", idTienda);
         }
@@ -90,9 +115,14 @@ public class ComentarioServicioImplementacion implements ComentarioServicio {
     }
 
     @Override
-    public String eliminarComentarioId(long idCategoria, long idTienda, long idComentario) {
+    public String eliminarComentarioId(Long idLugar, Long idCategoria, Long idTienda, Long idComentario) {
+        Lugar lugar = lugarRepositorio.findById(idLugar).orElseThrow(() -> new ResourceNotFoundException("Lugar", "ID", idLugar));
         Categoria categoria = categoriaRepositorio.findById(idCategoria).orElseThrow(() -> new ResourceNotFoundException("Categoria", "ID", idCategoria));
         Tienda tienda = tiendaRepositorio.findById(idTienda).orElseThrow(() -> new ResourceNotFoundException("Tienda", "ID", idTienda));
+
+        if(!categoria.getLugar().getIdLugar().equals(lugar.getIdLugar())){
+            throw new ResourceNotFoundException("Categoria", "ID", idCategoria);
+        }
         if(!tienda.getCategoria().getIdCategoria().equals(categoria.getIdCategoria())){
             throw new ResourceNotFoundException("Tienda", "ID", idTienda);
         }
