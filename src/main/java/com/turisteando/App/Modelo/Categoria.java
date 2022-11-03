@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "Categoria", uniqueConstraints = {@UniqueConstraint(columnNames = "NombreCategoria")})
+@Table(name = "Categoria")
 public class Categoria {
 
     @Id

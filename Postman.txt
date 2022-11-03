@@ -1,15 +1,50 @@
+LUGAR
+
+GET (OBTENER TODAS LOS LUGARES)
+http://localhost:8080/api/lugar
+
+
+GET(ID) (OBTENER UN LUGAR POR ID)
+http://localhost:8080/api/lugar/{id}
+
+
+POST (PUBLICAR UN LUGAR)
+http://localhost:8080/api/lugar
+
+JSON:
+{
+    "nombreLugar" : "Bogotá",
+}
+
+
+PUT(ID)(MODIFICAR UN LUGAR POR ID)
+http://localhost:8080/api/lugar/{id}
+
+JSON:
+{
+    "nombreLugar" : "Melgar",
+}
+
+
+DELETE(ID)(ELIMINAR UN LUGAR POR ID)
+http://localhost:8080/api/lugar/{id}
+
+
+----------------------------------------------------------------------------------
+
+
 CATEGORIAS
 
-GET (OBTENER TODAS LAS CATEGORIAS)
-https://turisteando-app.herokuapp.com/api/categoria
+GET (OBTENER TODAS LAS CATEGORIAS DE UN LUGAR)
+http://localhost:8080/api/lugar/categoria
 
 
-GET(ID) (OBTENER UNA CATEGORIAS POR ID)
-https://turisteando-app.herokuapp.com/api/categoria/{id}
+GET(ID) (OBTENER UNA CATEGORIAS POR ID DE UN LUGAR)
+http://localhost:8080/api/lugar/categoria/{id}
 
 
-POST (PUBLICAR UNA CATEGORIA)
-https://turisteando-app.herokuapp.com/api/categoria
+POST (PUBLICAR UNA CATEGORIA DE UN LUGAR)
+http://localhost:8080/api/lugar/categoria
 
 JSON:
 {
@@ -19,8 +54,8 @@ JSON:
 }
 
 
-PUT(ID)(MODIFICAR UNA CATEGORIA POR ID)
-https://turisteando-app.herokuapp.com/api/categoria/{id}
+PUT(ID)(MODIFICAR UNA CATEGORIA POR ID DE UN LUGAR)
+http://localhost:8080/api/lugar/categoria/{id}
 
 JSON:
 {
@@ -29,8 +64,8 @@ JSON:
 }
 
 
-DELETE(ID)(ELIMINAR UNA CATEGORIA POR ID)
-https://turisteando-app.herokuapp.com/api/categoria/{id}
+DELETE(ID)(ELIMINAR UNA CATEGORIA POR ID DE UN LUGAR)
+http://localhost:8080/api/lugar/categoria/{id}
 
 
 ----------------------------------------------------------------------------------
@@ -39,15 +74,15 @@ https://turisteando-app.herokuapp.com/api/categoria/{id}
 TIENDAS
 
 GET(ID-CATEGORIA)(OBTENER TODAS LAS TIENDAS DE UNA CATEGORIA)
-https://turisteando-app.herokuapp.com/api/categoria/{id}/tienda
+http://localhost:8080/api/lugar/categoria/{id}/tienda
 
 
 GET(ID-CATEGORIA/ID-TIENDA)(OBTENER UNA TIENDA DE UNA CATEGORIA)
-https://turisteando-app.herokuapp.com/api/categoria/{id}/tienda/{id}
+http://localhost:8080/api/lugar/categoria/{id}/tienda/{id}
 
 
 POST(ID-CATEGORIA)(PUBLICAR UNA TIENDA EN UNA CATEGORIA)
-https://turisteando-app.herokuapp.com/api/categoria/{id}/tienda
+http://localhost:8080/api/lugar/categoria/{id}/tienda
 
 JSON:
 {
@@ -63,7 +98,7 @@ JSON:
 
 
 PUT(ID-CATEGORIA/ID-TIENDA)(MODIFICAR UNA TIENDA POR ID DE UNA CATEGORIA)
-https://turisteando-app.herokuapp.com/api/categoria/{id}/tienda/{id}
+http://localhost:8080/api/lugar/categoria/{id}/tienda/{id}
 
 JSON:
 {
@@ -78,7 +113,7 @@ JSON:
 }
 
 DELETE(ID-CATEGORIA/ID-TIENDA)(ELIMINAR UNA TIENDA POR ID DE UNA CATEGORIA)
-https://turisteando-app.herokuapp.com/api/categoria/{id}/tienda/{id}
+http://localhost:8080/api/lugar/categoria/{id}/tienda/{id}
 
 
 ----------------------------------------------------------------------------------
@@ -87,15 +122,15 @@ https://turisteando-app.herokuapp.com/api/categoria/{id}/tienda/{id}
 COMENTARIOS
 
 GET(ID-CATEGORIA/ID-TIENDA)
-https://turisteando-app.herokuapp.com/api/categoria/{id}/tienda/{id}/comentarios/
+http://localhost:8080/api/lugar/categoria/{id}/tienda/{id}/comentario/
 
 
 GET(ID-CATEGORIA/ID-TIENDA/ID-COMENTARIO)
-https://turisteando-app.herokuapp.com/api/categoria/1/tienda/{id}/comentarios/{id}
+http://localhost:8080/api/lugar/categoria/1/tienda/{id}/comentario/{id}
 
 
 POST(ID-CATEGORIA/ID-TIENDA)
-https://turisteando-app.herokuapp.com/api/categoria/1/tienda/{id}/comentarios
+http://localhost:8080/api/lugar/categoria/1/tienda/{id}/comentario
 
 JSON:
 {
@@ -106,7 +141,7 @@ JSON:
 
 
 PUT(ID-CATEGORIA/ID-TIENDA/ID-COMENTARIO)
-https://turisteando-app.herokuapp.com/api/categoria/{id}/tienda/{id}/comentarios/{id}
+http://localhost:8080/api/lugar/categoria/{id}/tienda/{id}/comentario/{id}
 
 JSON:
 {
@@ -117,4 +152,4 @@ JSON:
 
 
 DELETE(ID-CATEGORIA/ID-TIENDA/ID-COMENTARIO)
-https://turisteando-app.herokuapp.com/api/categoria/{id}/tienda/{id}/comentarios/{id}
+http://localhost:8080/api/lugar/categoria/{id}/tienda/{id}/comentario/{id}

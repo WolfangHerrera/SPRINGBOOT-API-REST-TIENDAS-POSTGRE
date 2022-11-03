@@ -27,13 +27,13 @@ public class ComentarioServicioImplementacion implements ComentarioServicio {
     private LugarRepositorio lugarRepositorio;
 
     @Autowired
-    ComentarioRepositorio comentarioRepositorio;
+    private CategoriaRepositorio categoriaRepositorio;
 
     @Autowired
-    TiendaRepositorio tiendaRepositorio;
+    private TiendaRepositorio tiendaRepositorio;
 
     @Autowired
-    CategoriaRepositorio categoriaRepositorio;
+    private ComentarioRepositorio comentarioRepositorio;
 
     @Override
     public List<ComentarioDTO> listaComentarios(Long idLugar, Long idCategoria, Long idTienda) {
@@ -72,8 +72,8 @@ public class ComentarioServicioImplementacion implements ComentarioServicio {
 
     @Override
     public ComentarioDTO crearComentario(ComentarioDTO comentarioDTO, Long idLugar, Long idCategoria, Long idTienda) {
-        Lugar lugar = lugarRepositorio.findById(idLugar).orElseThrow(() -> new ResourceNotFoundException("Lugar", "ID", idLugar));
         Comentario comentario = mapEntidad(comentarioDTO);
+        Lugar lugar = lugarRepositorio.findById(idLugar).orElseThrow(() -> new ResourceNotFoundException("Lugar", "ID", idLugar));
         Categoria categoria = categoriaRepositorio.findById(idCategoria).orElseThrow(() -> new ResourceNotFoundException("Categoria", "ID", idCategoria));
         Tienda tienda = tiendaRepositorio.findById(idTienda).orElseThrow(() -> new ResourceNotFoundException("Tienda", "ID", idTienda));
 

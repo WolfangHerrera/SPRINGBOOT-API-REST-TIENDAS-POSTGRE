@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "Tienda", uniqueConstraints = {@UniqueConstraint(columnNames = {"NombreTienda", "EmailTienda"})})
+@Table(name = "Tienda")
 public class Tienda {
 
     @Id
@@ -40,6 +40,8 @@ public class Tienda {
     @JoinColumn(name = "idCategoria", nullable = false)
     private Categoria categoria;
 
+    @OneToMany(mappedBy = "tienda", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Reserva> reservas = new HashSet<>();
 
     @OneToMany(mappedBy = "tienda", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Comentario> comentarios = new HashSet<>();
@@ -100,14 +102,6 @@ public class Tienda {
         this.webTienda = webTienda;
     }
 
-    public Categoria getCategoria() {
-        return categoria;
-    }
-
-    public void setCategoria(Categoria categoria) {
-        this.categoria = categoria;
-    }
-
     public String getMapsTienda() {
         return mapsTienda;
     }
@@ -122,6 +116,14 @@ public class Tienda {
 
     public void setImagenTienda(String imagenTienda) {
         this.imagenTienda = imagenTienda;
+    }
+
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
     }
 
     public Tienda(Long idTienda, String nombreTienda, String descripcionTienda, String emailTienda, String direccionTienda, Long telefonoTienda, String webTienda, String mapsTienda, String imagenTienda, Categoria categoria) {
